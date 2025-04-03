@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Web Component</title>
+    <style>
+        body {
+            margin: 1em auto;
+            max-width: 40px;
+            width: 88%;
+        }
+    </style>
+</head>
+
+<body>
+    <wc-counter>
+        <button>Clicked 0 Times</button>
+    </wc-counter>
+
+    <script>
+        customElements.define('wc-counter', class extends HTMLElement {
+
+            /**
+             * Intstanciate our new component
+             * */
+            constructor() {
+                super();
+
+                this.count = 0;
+                this.button = this.querySelector('button');
+
+                this.button.addEventListener('click', this);
+                
+                this.button.setAttribute('aria-pressed', 'polite');
+                
+            }
+            /**
+                 * Handle events
+                 * @param {Event} event - The event object
+                */
+            handleEvent (event) {
+                    console.log('button clicked');
+                    this.count++;
+                    this.button.textContent = `Clicked ${this.count} Times`;                }
+        });
+    </script>
+</body>
+
+</html>
